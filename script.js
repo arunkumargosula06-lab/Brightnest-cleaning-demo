@@ -1,0 +1,23 @@
+const menuButton = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+menuButton.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(isOpen));
+  menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  menuButton.textContent = isOpen ? '×' : '☰';
+});
+nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  nav.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.textContent = '☰';
+}));
+const form = document.getElementById('quote-form');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  document.getElementById('form-message').textContent = name
+    ? `Thanks, ${name}! This is a demo confirmation. Your details have not been sent or stored.`
+    : 'Thanks! This is a demo confirmation. Your details have not been sent or stored.';
+  form.reset();
+});
+document.getElementById('year').textContent = new Date().getFullYear();
